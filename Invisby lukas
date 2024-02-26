@@ -1,0 +1,50 @@
+-- Create a ScreenGui to hold the GUI elements
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.Players.LocalPlayer.PlayerGui
+
+-- Create a TextButton to toggle invisibility
+local button = Instance.new("TextButton")
+button.Text = "Toggle Invisibility"
+button.Size = UDim2.new(0, 150, 0, 50)
+button.Position = UDim2.new(0.5, -75, 0.5, -25)
+button.Parent = gui
+
+-- Create a function to toggle invisibility when the button is clicked
+local function toggleInvisibility()
+    -- Get the player's character
+    local character = game.Players.LocalPlayer.Character
+    
+    -- Check if the character exists
+    if character then
+        -- Loop through each part of the character
+        for _, part in pairs(character:GetDescendants()) do
+            -- Check if the part is a BasePart (e.g., a part of the character's body)
+            if part:IsA("BasePart") then
+                -- Toggle transparency of the part
+                if part.Transparency == 1 then
+                    part.Transparency = 0
+                else
+                    part.Transparency = 1
+                end
+            end
+        end
+    end
+    
+    -- Create a notification
+    local notification = Instance.new("TextLabel")
+    notification.Text = "strandedlukas biggest option no stealing skids"
+    notification.Size = UDim2.new(0, 300, 0, 50)
+    notification.Position = UDim2.new(0.5, -150, 0.75, -25)
+    notification.BackgroundColor3 = Color3.new(0, 0, 0)
+    notification.TextColor3 = Color3.new(1, 1, 1)
+    notification.Font = Enum.Font.SourceSans
+    notification.TextSize = 20
+    notification.Parent = gui
+    
+    -- Remove the notification after a few seconds
+    wait(3)
+    notification:Destroy()
+end
+
+-- Connect the function to the button's Click event
+button.MouseButton1Click:Connect(toggleInvisibility)
